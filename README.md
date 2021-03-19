@@ -21,6 +21,6 @@ If the contact doesn't use that messenger, your second favorite messenger will b
 - WhatsApp
 
 ## Screenshots
-<img src="screenshots/settings.png" alt="settings" width="300"/> <img src="screenshots/contact_list.png" alt="contact list" width="300"/>
-<img src="screenshots/select_messenger.png" alt="select specific messenger for contact" width="300"/> <img src="screenshots/contact_search.png" alt="search for contacts" width="300"/>
-<img src="screenshots/contact_list_open_contacts.png" alt="option to open contact page" width="300"/>
+<img src="screenshots/en/settings.png" alt="settings" width="300"/> <img src="screenshots/en/contact_list.png" alt="contact list" width="300"/>
+<img src="screenshots/en/select_messenger.png" alt="select specific messenger for contact" width="300"/> <img src="screenshots/en/contact_search.png" alt="search for contacts" width="300"/>
+<img src="screenshots/en/contact_list_open_contacts.png" alt="option to open contact page" width="300"/>

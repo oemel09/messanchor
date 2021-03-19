@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MessAnchor</string>
+    <string name="title_home">Home</string>
+    <string name="title_settings">Einstellungen</string>
+
+    <string name="read_contacts_access_required">Die App muss deine Kontakte lesen, um sie dir anzuzeigen.</string>
+    <string name="ok">OK</string>
+    <string name="read_contacts_permission_granted">Berechtigung zum Lesen der Kontakte erteilt.</string>
+    <string name="read_contacts_permission_denied">Berechtigung zum Lesen der Kontakte abgelehnt.</string>
+
+    <string name="home_contacts_explanation">Tippe auf einen Kontakt um zu chatten</string>
+    <string name="home_no_messenger_found">Dieser Kontakt hat keinen Messenger.</string>
+    <string name="home_search_hint">Suche beliebige Kontakte</string>
+    <string name="home_contact_added_to_list">%1$s wurde hinzugefügt</string>
+    <string name="home_select_custom_messenger_for_user">Wähle einen Messenger für %1$s</string>
+    <string name="home_select_messenger_automatically">Wähle automatisch den besten</string>
+    <string name="home_contact_not_found">Fehler: Der ausgewählte Kontakte wurde nicht gefunden.</string>
+
+    <string name="settings_sort_messengers">Die App versucht die Messenger in der folgenden Reihenfolge zu öffnen</string>
+
+    <string name="messenger_item_messenger_icon">Messengers Icon</string>
+
+    <string name="contact_item_add_contact_to_list">Kontakt zur Liste hinzufügen</string>
+    <string name="contact_item_select_custom_messenger">Wähle einen bestimmten Messenger</string>
+    <string name="contact_item_open_contact_page">Öffne den Kontakt</string>
+    <string name="settings_show_open_contacts_page">Zeige einen Button um den Kontakt zu öffnen</string>
+    <string name="settings_general">Allgemein</string>
+</resources>

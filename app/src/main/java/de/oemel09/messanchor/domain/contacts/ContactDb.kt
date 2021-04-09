@@ -57,7 +57,7 @@ class ContactDb(private val context: Context) :
         db.close()
     }
 
-    internal fun loadListedContacts(): List<Contact> {
+    internal fun loadListedContacts(): MutableList<ContactListItem> {
         val db = readableDatabase
 
         val selection = "$COLUMN_IS_LISTED = ?"
@@ -69,7 +69,7 @@ class ContactDb(private val context: Context) :
         return contacts
     }
 
-    internal fun loadContacts(filter: String?): List<Contact> {
+    internal fun loadContacts(filter: String?): List<ContactListItem> {
         val db = readableDatabase
 
         var selection: String? = null
@@ -100,8 +100,8 @@ class ContactDb(private val context: Context) :
         return contactLookups
     }
 
-    private fun extractContacts(cursor: Cursor?): List<Contact> {
-        val contacts = mutableListOf<Contact>()
+    private fun extractContacts(cursor: Cursor?): MutableList<ContactListItem> {
+        val contacts = mutableListOf<ContactListItem>()
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {

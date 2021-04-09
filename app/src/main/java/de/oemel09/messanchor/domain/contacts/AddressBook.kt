@@ -8,8 +8,8 @@ import androidx.core.app.ActivityCompat
 
 class AddressBook(private val context: Context) {
 
-    internal fun loadListedContacts(): MutableList<Contact> {
-        val contacts = mutableListOf<Contact>()
+    internal fun loadListedContacts(): MutableList<ContactListItem> {
+        val contacts = mutableListOf<ContactListItem>()
         if (isReadContactsPermissionGiven()) {
             val cursor = context.contentResolver.query(
                 ContactsContract.Contacts.CONTENT_URI,

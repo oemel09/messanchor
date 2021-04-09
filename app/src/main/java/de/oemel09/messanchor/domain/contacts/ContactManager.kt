@@ -4,38 +4,36 @@ import android.content.Context
 import android.util.Log
 import de.oemel09.messanchor.domain.messengers.MESSENGER_ID_AUTO
 import de.oemel09.messanchor.domain.messengers.Messenger
-import kotlin.math.min
 
 private val TAG = ContactManager::class.simpleName
-private const val MAX_FAVORITE_CONTACTS = 5
 
 internal const val CONTACTS = "CONTACTS"
 internal const val ADDRESS_BOOK_ALREADY_QUERIED = "address_book_already_queried"
 
-class ContactManager(context: Context) {
+class ContactManager(val context: Context) {
 
     private val addressBook = AddressBook(context)
     private val contactDb = ContactDb(context)
     private val prefs = context.getSharedPreferences(CONTACTS, Context.MODE_PRIVATE)
 
-    internal fun loadListedContacts(): List<Contact> {
+    internal fun loadListedContacts(): List<ContactListItem> {
         var contacts = contactDb.loadListedContacts()
-        if (!prefs.getBoolean(ADDRESS_BOOK_ALREADY_QUERIED, false) && contacts.isEmpty()) {
-            contacts = addressBook.loadListedContacts()
-            if (contacts.isNotEmpty()) {
-                contacts.forEach { contactDb.insertContact(it) }
-                prefs.edit().putBoolean(ADDRESS_BOOK_ALREADY_QUERIED, true).apply()
-                contacts = contacts.subList(0, min(contacts.size, MAX_FAVORITE_CONTACTS))
-                contacts.forEach {
-                    it.isListed = true
-                    contactDb.updateContactIsListed(it)
+        if (contacts.isEmpty()) {
+            if (!prefs.getBoolean(ADDRESS_BOOK_ALREADY_QUERIED, false)) {
+                contacts = addressBook.loadListedContacts()
+                if (contacts.isNotEmpty()) {
+                    contacts.forEach { contactDb.insertContact(it as Contact) }
+                    prefs.edit().putBoolean(ADDRESS_BOOK_ALREADY_QUERIED, true).apply()
                 }
+                contacts = emptyList<ContactListItem>().toMutableList()
             }
         }
+
+        contacts.addAll(Explanations(context, prefs).getExplanations())
         return contacts
     }
 
-    internal fun loadContacts(filter: String): List<Contact> {
+    internal fun loadContacts(filter: String): List<ContactListItem> {
         var contacts = contactDb.loadContacts(filter)
         if (contacts.isEmpty()) {
             contacts = addressBook.loadContacts(filter)

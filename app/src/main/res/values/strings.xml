@@ -6,7 +6,6 @@
     <string name="read_contacts_access_required">Reading contacts is required for this app to show your contacts.</string>
     <string name="ok">OK</string>
     <string name="read_contacts_permission_granted">Reading contacts permission was granted.</string>
-    <string name="read_contacts_permission_denied">Reading contacts permission request was denied.</string>
 
     <string name="home_contacts_explanation">Tap a contact to start chatting</string>
     <string name="home_no_messenger_found">No messenger found for this contact.</string>
@@ -25,4 +24,7 @@
     <string name="contact_item_open_contact_page">Open contact page</string>
     <string name="settings_show_open_contacts_page">Show button to open contacts page</string>
     <string name="settings_general">General</string>
+    <string name="explanation_add_contacts">Search for contacts and add them to this list.</string>
+    <string name="explanation_swipe_to_remove">Swipe left or right to remove contacts from this list.</string>
+    <string name="explanation_threema_contacts">Seems you have Threema installed. Make sure to connect your Threema contacts to your address book for everything to work properly.</string>
 </resources>

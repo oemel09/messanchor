@@ -29,6 +29,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import de.oemel09.messanchor.R
 import de.oemel09.messanchor.domain.Opener
+import de.oemel09.messanchor.domain.contacts.Contact
+import de.oemel09.messanchor.domain.contacts.Explanation
 import de.oemel09.messanchor.domain.messengers.MESSENGER_ID_AUTO
 import de.oemel09.messanchor.domain.messengers.Messenger
 import de.oemel09.messanchor.domain.messengers.MessengerManager
@@ -63,7 +65,7 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
         rvContacts.layoutManager = LinearLayoutManager(context)
         rvContacts.adapter = contactAdapter
         val dragDirs = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeDirs = ItemTouchHelper.LEFT
+        val swipeDirs = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         val touchHelper = ItemTouchHelper(ItemTouchHelperCallback(dragDirs, swipeDirs, this))
         touchHelper.attachToRecyclerView(rvContacts)
         homeViewModel.getContacts().observe(viewLifecycleOwner, {
@@ -128,11 +130,7 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
                 ).show()
                 readContacts()
             } else {
-                Snackbar.make(
-                    rootLayout,
-                    R.string.read_contacts_permission_denied,
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                requestReadContactsPermission()
             }
         }
     }
@@ -182,32 +180,43 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
     }
 
     override fun onContactClick(position: Int) {
-        val contact = homeViewModel.getContact(position)
-        val opener = messengerManager.getOpener(contact)
-        if (opener == null) {
-            Snackbar.make(
-                rootLayout,
-                getString(R.string.home_no_messenger_found),
-                Snackbar.LENGTH_SHORT
-            )
-                .show()
+        val item = homeViewModel.getContactItem(position)
+        if (item is Contact) {
+            val opener = messengerManager.getOpener(item)
+            if (opener == null) {
+                Snackbar.make(
+                    rootLayout,
+                    getString(R.string.home_no_messenger_found),
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+            } else {
+                openMessenger(opener)
+            }
         } else {
-            openMessenger(opener)
+            val explanation = item as Explanation
+            if (explanation.intent != null) {
+                startActivity(explanation.intent)
+            }
         }
     }
 
     override fun onAddContactClick(position: Int) {
         homeViewModel.addItem(position)
         contactAdapter.notifyItemChanged(position)
+        val contactItem = homeViewModel.getContactItem(position) as Contact
         Snackbar.make(
             rootLayout,
-            getString(R.string.home_contact_added_to_list, homeViewModel.getContact(position).name),
+            getString(
+                R.string.home_contact_added_to_list,
+                contactItem.name
+            ),
             Snackbar.LENGTH_SHORT
         ).show()
     }
 
     override fun onOpenContactPageClick(position: Int) {
-        val contact = homeViewModel.getContact(position)
+        val contact = homeViewModel.getContactItem(position) as Contact
         val contactUri = messengerManager.getContactUri(contact)
         if (contactUri == null) {
             Snackbar.make(
@@ -224,7 +233,7 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
     override fun onMessengerIconClick(position: Int) {
         val builder = AlertDialog.Builder(requireContext())
         val contactPosition = position
-        val selectedContact = homeViewModel.getContact(position)
+        val selectedContact = homeViewModel.getContactItem(position) as Contact
         builder.setTitle(
             getString(
                 R.string.home_select_custom_messenger_for_user,
@@ -258,7 +267,7 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
     }
 
     override fun onItemDismiss(position: Int) {
-        homeViewModel.removeItem(position)
+        homeViewModel.removeItem(position, requireContext())
         contactAdapter.notifyItemRemoved(position)
     }
 

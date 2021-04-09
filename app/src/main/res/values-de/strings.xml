@@ -6,7 +6,6 @@
     <string name="read_contacts_access_required">Die App muss deine Kontakte lesen, um sie dir anzuzeigen.</string>
     <string name="ok">OK</string>
     <string name="read_contacts_permission_granted">Berechtigung zum Lesen der Kontakte erteilt.</string>
-    <string name="read_contacts_permission_denied">Berechtigung zum Lesen der Kontakte abgelehnt.</string>
 
     <string name="home_contacts_explanation">Tippe auf einen Kontakt um zu chatten</string>
     <string name="home_no_messenger_found">Dieser Kontakt hat keinen Messenger.</string>
@@ -25,4 +24,8 @@
     <string name="contact_item_open_contact_page">Öffne den Kontakt</string>
     <string name="settings_show_open_contacts_page">Zeige einen Button um den Kontakt zu öffnen</string>
     <string name="settings_general">Allgemein</string>
+
+    <string name="explanation_add_contacts">Suche Kontakte und füge sie zu dieser Liste hinzu.</string>
+    <string name="explanation_swipe_to_remove">Wische nach links oder rechts um Kontakte aus der Liste zu entfernen.</string>
+    <string name="explanation_threema_contacts">Sieht aus als hättest du Threema installiert. Klicke hier und Verknüpfe deine Kontakte aus Threema mit den Kontakten aus deinem Adressbuch, damit alles wunderbar funktioniert.</string>
 </resources>

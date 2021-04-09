@@ -6,7 +6,7 @@ data class Contact(
     var customMessenger: String?,
     var isListed: Boolean,
     var priority: Int
-) {
+) : ContactListItem {
 
     constructor(lookup: String, name: String) : this(lookup, name, null, false, 0)
 }

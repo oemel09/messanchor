@@ -43,9 +43,8 @@ class MessengerManager(private val context: Context) {
         if (messengers == null) {
             // default messenger order
             messengers = ArrayList()
-            val p = context.packageManager
             for (m in supportedMessengers) {
-                if (isPackageInstalled(m.id, p)) {
+                if (isPackageInstalled(m.id)) {
                     messengers.add(m)
                 }
             }
@@ -54,9 +53,9 @@ class MessengerManager(private val context: Context) {
         return messengers
     }
 
-    private fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
+    fun isPackageInstalled(packageName: String): Boolean {
         return try {
-            packageManager.getPackageInfo(packageName, 0)
+            context.packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
@@ -145,5 +144,9 @@ class MessengerManager(private val context: Context) {
             cursor.close()
         }
         return opener
+    }
+
+    fun getThreemaId(): String {
+        return MESSENGER_ID_THREEMA
     }
 }

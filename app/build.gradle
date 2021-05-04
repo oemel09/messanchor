@@ -11,8 +11,8 @@ android {
         applicationId "de.oemel09.messanchor"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 111
-        versionName "1.1.1"
+        versionCode 112
+        versionName "1.1.2"
     }
 
     buildTypes {

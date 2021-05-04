@@ -56,7 +56,9 @@ class AddressBook(private val context: Context) {
                         cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
                     val name =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                    contacts.add(Contact(lookupKey, name))
+                    if (name != null) {
+                        contacts.add(Contact(lookupKey, name))
+                    }
                 }
                 cursor.close()
             }

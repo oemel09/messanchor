@@ -71,8 +71,7 @@ class ContactAdapter(
             contactViewHolder.ivMessengerIcon.imageTintList =
                 ColorStateList.valueOf(context.getColor(R.color.primaryTextColor))
         } else {
-            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            val icon = context.packageManager.getApplicationIcon(contact.customMessenger)
+            val icon = context.packageManager.getApplicationIcon(contact.customMessenger!!)
             contactViewHolder.ivMessengerIcon.imageTintList = null
             contactViewHolder.ivMessengerIcon.setImageDrawable(icon)
             contactViewHolder.ivMessengerIcon.setBackgroundResource(0)

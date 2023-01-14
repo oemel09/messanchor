@@ -3,6 +3,7 @@ package de.oemel09.messanchor.domain.messengers
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.provider.ContactsContract
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -53,9 +54,17 @@ class MessengerManager(private val context: Context) {
         return messengers
     }
 
-    fun isPackageInstalled(packageName: String): Boolean {
+    private fun isPackageInstalled(packageName: String): Boolean {
         return try {
-            context.packageManager.getPackageInfo(packageName, 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                context.packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.PackageInfoFlags.of(0)
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                context.packageManager.getPackageInfo(packageName, 0)
+            }
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
@@ -144,9 +153,5 @@ class MessengerManager(private val context: Context) {
             cursor.close()
         }
         return opener
-    }
-
-    fun getThreemaId(): String {
-        return MESSENGER_ID_THREEMA
     }
 }

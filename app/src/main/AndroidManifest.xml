@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <queries>
+        <package android:name="ch.threema.app" />
+        <package android:name="org.telegram.messenger" />
+        <package android:name="org.thoughtcrime.securesms" />
+        <package android:name="com.whatsapp" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,9 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MessAnchor">
+
         <activity
             android:name="de.oemel09.messanchor.MainActivity"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

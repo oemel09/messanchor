@@ -27,5 +27,4 @@
 
     <string name="explanation_add_contacts">Suche Kontakte und füge sie zu dieser Liste hinzu.</string>
     <string name="explanation_swipe_to_remove">Wische nach links oder rechts um Kontakte aus der Liste zu entfernen.</string>
-    <string name="explanation_threema_contacts">Sieht aus als hättest du Threema installiert. Klicke hier und Verknüpfe deine Kontakte aus Threema mit den Kontakten aus deinem Adressbuch, damit alles wunderbar funktioniert.</string>
 </resources>

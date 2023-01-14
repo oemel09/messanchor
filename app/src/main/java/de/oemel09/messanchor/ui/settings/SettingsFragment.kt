@@ -25,7 +25,7 @@ class SettingsFragment : Fragment(), OnItemDragListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         messengerAdapter = MessengerAdapter(requireContext(), null)
@@ -35,15 +35,15 @@ class SettingsFragment : Fragment(), OnItemDragListener {
         val dragDirs = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val touchHelper = ItemTouchHelper(ItemTouchHelperCallback(dragDirs, 0, this))
         touchHelper.attachToRecyclerView(rvMessengers)
-        settingsViewModel.messengerLiveData.observe(viewLifecycleOwner, {
+        settingsViewModel.messengerLiveData.observe(viewLifecycleOwner) {
             messengerAdapter.updateMessengers(it)
-        })
+        }
 
         val switchOpenContactsPage =
             root.findViewById<SwitchCompat>(R.id.settings_switch_show_open_contacts_page)
-        settingsViewModel.showOpenContactsPageLiveData.observe(viewLifecycleOwner, {
+        settingsViewModel.showOpenContactsPageLiveData.observe(viewLifecycleOwner) {
             switchOpenContactsPage.isChecked = it
-        })
+        }
         switchOpenContactsPage.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
             settingsViewModel.setShowOpenContactsPage(b)
         }

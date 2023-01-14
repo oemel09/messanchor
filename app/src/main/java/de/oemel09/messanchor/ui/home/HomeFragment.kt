@@ -68,9 +68,9 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
         val swipeDirs = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         val touchHelper = ItemTouchHelper(ItemTouchHelperCallback(dragDirs, swipeDirs, this))
         touchHelper.attachToRecyclerView(rvContacts)
-        homeViewModel.getContacts().observe(viewLifecycleOwner, {
+        homeViewModel.getContacts().observe(viewLifecycleOwner) {
             contactAdapter.updateContacts(it)
-        })
+        }
 
         val etSearch = root.findViewById<TextInputEditText>(R.id.home_tiet_search_contacts)
         etSearch.addTextChangedListener(searchWatcher)

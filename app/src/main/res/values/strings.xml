@@ -26,5 +26,4 @@
     <string name="settings_general">General</string>
     <string name="explanation_add_contacts">Search for contacts and add them to this list.</string>
     <string name="explanation_swipe_to_remove">Swipe left or right to remove contacts from this list.</string>
-    <string name="explanation_threema_contacts">Seems you have Threema installed. Make sure to connect your Threema contacts to your address book for everything to work properly.</string>
 </resources>

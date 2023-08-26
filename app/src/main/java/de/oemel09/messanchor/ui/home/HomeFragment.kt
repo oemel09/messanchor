@@ -196,7 +196,7 @@ class HomeFragment : Fragment(), OnItemDragListener, ContactAdapter.OnContactCli
         } else {
             val explanation = item as Explanation
             if (explanation.intent != null) {
-                startActivity(explanation.intent)
+                startActivity(explanation.intent!!)
             }
         }
     }
